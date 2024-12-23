@@ -1,10 +1,11 @@
 #include <raylib.h>
+#include <stdlib.h>
 
 #include "player.h"
 
 
 const float playerSpeed = 6.5;
- 
+
 
 Player *playerCreation() {
     Player *player = (Player *) malloc(sizeof(Player));

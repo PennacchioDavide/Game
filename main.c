@@ -29,6 +29,8 @@ int main() {
         EndDrawing();
     }
 
+    free(player);
+
     CloseWindow();
 
     return 0;
