@@ -5,3 +5,4 @@ typedef struct Player {
 }Player;
 
 Player *playerCreation();
+void playerMovement(Player *player);
