@@ -9,7 +9,7 @@ const int screenHeight = 720;
 
 int main() {
 
-    InitWindow(screenWidth, screenHeight, "Snake");
+    InitWindow(screenWidth, screenHeight, "Game");
     HideCursor();
     SetTargetFPS(60);
 
