@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #include "player.h"
+#include "walls.h"
 
 
 const int screenWidth = 1080;
@@ -15,6 +16,8 @@ int main() {
     SetTargetFPS(60);
 
     Player *player = playerCreation();
+    Wall *walls = wallCreation(100, 10, 100, 100);
+
 
     while (!WindowShouldClose()) {
 
@@ -25,12 +28,15 @@ int main() {
         BeginDrawing();
 
             ClearBackground(BLACK);
-            DrawRectangleRec(player->rect, RAYWHITE);
+            DrawRectangleRec(player->rect, RED);
+            showWalls(walls);
 
         EndDrawing();
     }
 
+    // Free Mallocs
     free(player);
+    freeWalls(walls);
 
     CloseWindow();
 

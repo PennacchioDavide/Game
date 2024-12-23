@@ -1,5 +1,5 @@
 all: 
-	gcc -o main main.c player.c -lraylib -lm -ldl -lpthread
+	gcc -o main main.c player.c walls.c -lraylib -lm -ldl -lpthread
 	./main
 	
 val:
