@@ -48,8 +48,6 @@ void playerMovement(Player *player) {
     }
 }
 
-
-//Temporary
 void playerWallCollision(Player *player, Wall *walls) {
     Wall *tmp = walls;
     while (tmp) {
@@ -58,4 +56,8 @@ void playerWallCollision(Player *player, Wall *walls) {
         }
         tmp = tmp->suiv;
     }
+}
+
+void showPlayer(Player *player) {
+    DrawRectangleRec(player->rect, PURPLE);
 }

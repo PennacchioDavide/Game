@@ -3,6 +3,7 @@
 
 #include "player.h"
 #include "walls.h"
+#include "screens.h"
 
 
 const int screenWidth = 1080;
@@ -12,7 +13,6 @@ const int screenHeight = 720;
 int main() {
 
     InitWindow(screenWidth, screenHeight, "Test Game");
-    HideCursor();
     SetTargetFPS(60);
 
     Player *player = playerCreation();
@@ -31,8 +31,11 @@ int main() {
         BeginDrawing();
 
             ClearBackground(BLACK);
-            DrawRectangleRec(player->rect, PURPLE);
-            showWalls(walls);
+
+            sceneFunction();
+
+            //showPlayer(player);
+            //showWalls(walls);
 
         EndDrawing();
     }

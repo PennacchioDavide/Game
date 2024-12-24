@@ -1,4 +1,4 @@
-SOURCES = main.c player.c walls.c
+SOURCES = main.c player.c walls.c screens.c
 
 all: 
 	gcc -o main $(SOURCES) -lraylib -lm -ldl -lpthread
