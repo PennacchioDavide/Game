@@ -54,8 +54,7 @@ void playerWallCollision(Player *player, Wall *walls) {
     Wall *tmp = walls;
     while (tmp) {
         if (CheckCollisionRecs(player->rect, tmp->rect)) {
-            destroyRankWall(walls, tmp->rank);
-            break;
+            break; //ADD SOMETHING
         }
         tmp = tmp->suiv;
     }

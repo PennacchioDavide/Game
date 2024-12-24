@@ -16,9 +16,9 @@ int main() {
     SetTargetFPS(60);
 
     Player *player = playerCreation();
-    Wall *walls = wallCreation(100, 10, 100, 100);
-    addLastWall(walls, 10, 100, 800, 600);
-    addLastWall(walls, 100, 10, 500, 500);
+    Wall *walls = wallCreation(100, 10, 100, 100, "block");
+    addLastWall(walls, 10, 100, 800, 600, "win");
+    addLastWall(walls, 100, 10, 500, 500, "death");
 
 
     while (!WindowShouldClose()) {
@@ -31,7 +31,7 @@ int main() {
         BeginDrawing();
 
             ClearBackground(BLACK);
-            DrawRectangleRec(player->rect, RED);
+            DrawRectangleRec(player->rect, PURPLE);
             showWalls(walls);
 
         EndDrawing();

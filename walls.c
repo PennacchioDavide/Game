@@ -1,13 +1,14 @@
 #include <raylib.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "player.h"
 #include "walls.h"
 
 
-Wall *wallCreation(float width, float height, float x, float y) {
+Wall *wallCreation(float width, float height, float x, float y, char *type) {
     Wall *wall = (Wall *) malloc(sizeof(Wall));
-    wall->rank = 1;
+    wall->type = type;
     wall->rect.height = height;
     wall->rect.width = width;
     wall->rect.x = x;
@@ -16,40 +17,26 @@ Wall *wallCreation(float width, float height, float x, float y) {
     return wall;
 }
 
-void addLastWall(Wall *walls, float width, float height, float x, float y){
-    Wall *w = wallCreation(width, height, x, y);
-    int i = 1;
-    while(walls->suiv != NULL) {
+void addLastWall(Wall *walls, float width, float height, float x, float y, char *type){
+    Wall *w = wallCreation(width, height, x, y, type);
+    while (walls->suiv != NULL) {
         walls = walls->suiv;
-        i++;
     }
-    i++;
     walls->suiv = w;
-    w->rank = i;
-}
-
-void destroyRankWall(Wall *walls, int rank) {
-    Wall *head = walls;
-    Wall *bef = NULL;
-    while (walls && walls->rank != rank) {
-        bef = walls;
-        walls = walls->suiv;
-    }
-    if (walls) {
-        if (bef) {
-            bef->suiv = walls->suiv;
-        }
-        else {
-            head = walls->suiv;
-        }
-        free(walls);
-    }
 }
 
 void showWalls(Wall *walls) {
     Wall *tmp = walls;
-    while(tmp != NULL) {
-        DrawRectangleRec(tmp->rect, RAYWHITE);
+    while (tmp) {
+        if (strcmp(tmp->type, "block") == 0) {
+            DrawRectangleRec(tmp->rect, RAYWHITE);
+        }
+        else if(strcmp(tmp->type, "death") == 0) {
+            DrawRectangleRec(tmp->rect, RED);
+        }
+        else if(strcmp(tmp->type, "win") == 0) {
+            DrawRectangleRec(tmp->rect, GREEN);
+        }
         tmp = tmp->suiv;
     }
 }
