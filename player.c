@@ -1,5 +1,6 @@
 #include <raylib.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "player.h"
 #include "walls.h"
@@ -45,16 +46,6 @@ void playerMovement(Player *player) {
     if (IsKeyDown(KEY_S) && IsKeyDown(KEY_A)) {
         player->rect.y += playerSpeed * 0.707;
         player->rect.x -= playerSpeed * 0.707;
-    }
-}
-
-void playerWallCollision(Player *player, Wall *walls) {
-    Wall *tmp = walls;
-    while (tmp) {
-        if (CheckCollisionRecs(player->rect, tmp->rect)) {
-            break; //ADD SOMETHING
-        }
-        tmp = tmp->suiv;
     }
 }
 
