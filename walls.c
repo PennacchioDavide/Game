@@ -6,8 +6,8 @@
 
 
 Wall *wallCreation(float width, float height, float x, float y) {
-    srand(time(NULL));
     Wall *wall = (Wall *) malloc(sizeof(Wall));
+    wall->rank = 1;
     wall->rect.height = height;
     wall->rect.width = width;
     wall->rect.x = x;
@@ -16,29 +16,34 @@ Wall *wallCreation(float width, float height, float x, float y) {
     return wall;
 }
 
-void addLastWall(Wall *wall, float width, float height, float x, float y){
+void addLastWall(Wall *walls, float width, float height, float x, float y){
     Wall *w = wallCreation(width, height, x, y);
-    while(wall->suiv != NULL) {
-        wall = wall->suiv;
+    int i = 1;
+    while(walls->suiv != NULL) {
+        walls = walls->suiv;
+        i++;
     }
-    wall->suiv = w;
+    i++;
+    walls->suiv = w;
+    w->rank = i;
 }
 
-void destroyLastWall(Wall *wall) {
-    if (wall == NULL) { 
-        return;
+void destroyRankWall(Wall *walls, int rank) {
+    Wall *head = walls;
+    Wall *bef = NULL;
+    while (walls && walls->rank != rank) {
+        bef = walls;
+        walls = walls->suiv;
     }
-    if (wall->suiv == NULL) { 
-        free(wall);
-        wall = NULL;
-        return;
+    if (walls) {
+        if (bef) {
+            bef->suiv = walls->suiv;
+        }
+        else {
+            head = walls->suiv;
+        }
+        free(walls);
     }
-    Wall *tmp = wall;
-    while (tmp->suiv->suiv != NULL) {
-        tmp = tmp->suiv;
-    }
-    free(tmp->suiv);
-    tmp->suiv = NULL;
 }
 
 void showWalls(Wall *walls) {

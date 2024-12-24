@@ -17,33 +17,46 @@ Player *playerCreation() {
 }
 
 void playerMovement(Player *player) {
-    if (IsKeyDown(KEY_UP) && !IsKeyDown(KEY_RIGHT) && !IsKeyDown(KEY_LEFT)) {
+    if (IsKeyDown(KEY_W) && !IsKeyDown(KEY_D) && !IsKeyDown(KEY_A)) {
         player->rect.y -= playerSpeed;
     }
-    if (IsKeyDown(KEY_DOWN) && !IsKeyDown(KEY_RIGHT) && !IsKeyDown(KEY_LEFT)) {
+    if (IsKeyDown(KEY_S) && !IsKeyDown(KEY_D) && !IsKeyDown(KEY_A)) {
         player->rect.y += playerSpeed;
     }
-    if (IsKeyDown(KEY_RIGHT) && !IsKeyDown(KEY_UP) && !IsKeyDown(KEY_DOWN)) {
+    if (IsKeyDown(KEY_D) && !IsKeyDown(KEY_W) && !IsKeyDown(KEY_S)) {
         player->rect.x += playerSpeed;
     }
-    if (IsKeyDown(KEY_LEFT) &&!IsKeyDown(KEY_UP) && !IsKeyDown(KEY_DOWN)) {
+    if (IsKeyDown(KEY_A) &&!IsKeyDown(KEY_W) && !IsKeyDown(KEY_S)) {
         player->rect.x -= playerSpeed;
     }
 
-    if (IsKeyDown(KEY_UP) && IsKeyDown(KEY_RIGHT)) {
+    if (IsKeyDown(KEY_W) && IsKeyDown(KEY_D)) {
         player->rect.y -= playerSpeed * 0.707;
         player->rect.x += playerSpeed * 0.707;
     }
-    if (IsKeyDown(KEY_UP) && IsKeyDown(KEY_LEFT)) {
+    if (IsKeyDown(KEY_W) && IsKeyDown(KEY_A)) {
         player->rect.y -= playerSpeed * 0.707;
         player->rect.x -= playerSpeed * 0.707;
     }
-    if (IsKeyDown(KEY_DOWN) && IsKeyDown(KEY_RIGHT)) {
+    if (IsKeyDown(KEY_S) && IsKeyDown(KEY_D)) {
         player->rect.y += playerSpeed * 0.707;
         player->rect.x += playerSpeed * 0.707;
     }
-    if (IsKeyDown(KEY_DOWN) && IsKeyDown(KEY_LEFT)) {
+    if (IsKeyDown(KEY_S) && IsKeyDown(KEY_A)) {
         player->rect.y += playerSpeed * 0.707;
         player->rect.x -= playerSpeed * 0.707;
+    }
+}
+
+
+//Temporary
+void playerWallCollision(Player *player, Wall *walls) {
+    Wall *tmp = walls;
+    while (tmp) {
+        if (CheckCollisionRecs(player->rect, tmp->rect)) {
+            destroyRankWall(walls, tmp->rank);
+            break;
+        }
+        tmp = tmp->suiv;
     }
 }

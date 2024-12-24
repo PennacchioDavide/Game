@@ -11,18 +11,21 @@ const int screenHeight = 720;
 
 int main() {
 
-    InitWindow(screenWidth, screenHeight, "Game");
+    InitWindow(screenWidth, screenHeight, "Test Game");
     HideCursor();
     SetTargetFPS(60);
 
     Player *player = playerCreation();
     Wall *walls = wallCreation(100, 10, 100, 100);
+    addLastWall(walls, 10, 100, 800, 600);
+    addLastWall(walls, 100, 10, 500, 500);
 
 
     while (!WindowShouldClose()) {
 
         // Player Movement
         playerMovement(player);
+        playerWallCollision(player, walls);
 
         // Drawing on Screen
         BeginDrawing();
